@@ -70,7 +70,7 @@ int main(int argc, char **argv)
 	strncpy(ept.name, argv[2], sizeof(ept.name));
 	ept.name[sizeof(ept.name)-1] = '\0';
 
-	if (argc == 4) {
+	if (argc == 5) {
 		ept.src = atoi(argv[3]);
 		ept.dst = atoi(argv[4]);
 
