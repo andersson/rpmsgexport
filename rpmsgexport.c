@@ -59,6 +59,7 @@ int main(int argc, char **argv)
 	struct rpmsg_endpoint_info ept;
 	int ret;
 	int fd;
+	char *endptr;
 
 	if (argc != 3 && argc != 5)
 		usage();
@@ -71,10 +72,14 @@ int main(int argc, char **argv)
 	ept.name[sizeof(ept.name)-1] = '\0';
 
 	if (argc == 5) {
-		ept.src = atoi(argv[3]);
-		ept.dst = atoi(argv[4]);
+		ept.src = strtoul(argv[3], &endptr, 10);
 
-		if (!ept.src || !ept.dst)
+		if (*endptr)
+			usage();
+
+		ept.dst = strtoul(argv[4], &endptr, 10);
+
+		if (*endptr)
 			usage();
 	}
 
